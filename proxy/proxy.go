@@ -6,9 +6,8 @@ import (
 	"net/http"
 )
 
-func proxyHandler(w http.ResponseWriter, r *http.Request) {
+func proxyHandler(w http.ResponseWriter, r *http.Request, targetURL string) {
 
-    targetURL := "http://127.0.0.1:1338"
     client := &http.Client{
         CheckRedirect: func(req *http.Request, via []*http.Request) error {
             return http.ErrUseLastResponse

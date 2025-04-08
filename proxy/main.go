@@ -10,16 +10,15 @@ const API_IP string = "127.0.0.1:8081"
 
 var servers []string
 
-var resp *http.Response
+func API(w http.ResponseWriter, r *http.Request) {
+	idx := RoundRobin(len(servers))
 
-func TestAPI(w http.ResponseWriter, r *http.Request) {
-
-	
-	proxyHandler(w, r)
+	url := servers[idx]
+	proxyHandler(w, r, url)
 }
 
 func ApiRoute(mux *http.ServeMux) {
-	mux.HandleFunc("/", TestAPI)
+	mux.HandleFunc("/", API)
 }
 
 func InitializeRoutes() http.Handler {

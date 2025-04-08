@@ -34,9 +34,6 @@ func main() {
 	servers = append(servers, "http://127.0.0.1:1337")
 	servers = append(servers, "http://127.0.0.1:1338")
 
-	for range 5 {
-	}
-
 	mux := InitializeRoutes()
 	fmt.Println("Start listening on:", API_IP)
 	if err := http.ListenAndServe(API_IP, mux); err != nil {
